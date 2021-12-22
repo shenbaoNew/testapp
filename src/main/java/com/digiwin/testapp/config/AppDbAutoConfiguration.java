@@ -1,11 +1,13 @@
 package com.digiwin.testapp.config;
 
+import com.digiwin.testapp.config.condition.DbEnableCondition;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,6 +31,7 @@ public class AppDbAutoConfiguration {
     }
 
     @Bean(name = {"app-dataSource"})
+    @Conditional({DbEnableCondition.class})
     public BasicDataSource basicDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
@@ -44,18 +47,21 @@ public class AppDbAutoConfiguration {
     }
 
     @Bean(name = {"app-proxyDataSource"})
+    @Conditional({DbEnableCondition.class})
     public TransactionAwareDataSourceProxy transactionAwareDataSourceProxy(@Qualifier("app-dataSource") BasicDataSource basicDataSource) {
         TransactionAwareDataSourceProxy proxy = new TransactionAwareDataSourceProxy(basicDataSource);
         return proxy;
     }
 
     @Bean(name = {"app-queryRunner"})
+    @Conditional({DbEnableCondition.class})
     public QueryRunner queryRunner(@Qualifier("app-proxyDataSource") TransactionAwareDataSourceProxy transactionAwareDataSourceProxy) {
         QueryRunner runner = new QueryRunner(transactionAwareDataSourceProxy);
         return runner;
     }
 
     @Bean(name = {"app-transactionManager"})
+    @Conditional({DbEnableCondition.class})
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("app-proxyDataSource") TransactionAwareDataSourceProxy transactionAwareDataSourceProxy) {
         DataSourceTransactionManager sourceTransactionManager = new DataSourceTransactionManager();
         sourceTransactionManager.setDataSource(transactionAwareDataSourceProxy);
@@ -63,6 +69,7 @@ public class AppDbAutoConfiguration {
     }
 
     @Bean(name = {"app-jdbcTemplate"})
+    @Conditional({DbEnableCondition.class})
     public JdbcTemplate jdbcTemplate(@Qualifier("app-proxyDataSource") DataSource dataSource){
         JdbcTemplate template = new JdbcTemplate(dataSource);
         return template;

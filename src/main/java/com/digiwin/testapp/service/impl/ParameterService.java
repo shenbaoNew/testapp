@@ -22,10 +22,9 @@ import java.util.Map;
 @Service("parameter")
 public class ParameterService implements IParameterService {
     @Autowired
-    @Qualifier("app-jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
+    @Autowired(required = false)
     private QueryRunner queryRunner;
 
     @Override
