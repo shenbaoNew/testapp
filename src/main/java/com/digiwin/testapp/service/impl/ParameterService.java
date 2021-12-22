@@ -22,9 +22,9 @@ import java.util.Map;
 @Service("parameter")
 public class ParameterService implements IParameterService {
     @Autowired
+    @Qualifier("app-jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    @Qualifier("app-queryRunner")
     @Autowired
     private QueryRunner queryRunner;
 
@@ -40,7 +40,7 @@ public class ParameterService implements IParameterService {
         List<Map<String, Object>> parameters = null;
         try {
             parameters = queryRunner.query(sql, new MapListHandler());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return parameters;
