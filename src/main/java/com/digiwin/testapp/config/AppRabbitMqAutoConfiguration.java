@@ -125,4 +125,15 @@ public class AppRabbitMqAutoConfiguration {
 
         return rabbitTemplate;
     }
+
+    @Bean
+    public Queue manualConfirmQueueDemo() {
+        //手工确认
+        return new Queue("manualConfirmQueueDemo", true);
+    }
+
+    @Bean
+    public Binding manualConfirmBinding() {
+        return BindingBuilder.bind(manualConfirmQueueDemo()).to(directExchangeDemo()).with("direct.manual.demo");
+    }
 }

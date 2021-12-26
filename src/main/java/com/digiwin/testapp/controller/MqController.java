@@ -48,4 +48,10 @@ public class MqController {
         //测试确认机制===>找到交换机,但找不到队列
         mqService.testNotFindQueue("hello,beijing,not exists queue");
     }
+
+    @RequestMapping("/manualack")
+    public void sendManualAckMessage() {
+        //测试确认机制===>找到交换机,但找不到队列
+        mqService.sendManualAckMsg("hello beijing manual ack queue");
+    }
 }

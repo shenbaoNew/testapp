@@ -53,7 +53,13 @@ public class MqService implements IMqService {
         rabbitTemplate.convertAndSend("directExchangeDemo", "demo_router_key_not_find", sendMsg);
     }
 
-    public Map getMsg(String msg){
+    @Override
+    public void sendManualAckMsg(String msg) {
+        Map<String, Object> sendMsg = getMsg(msg);
+        rabbitTemplate.convertAndSend("directExchangeDemo", "direct.manual.demo", sendMsg);
+    }
+
+    public Map getMsg(String msg) {
         Map<String, Object> sendMsg = new HashMap<>();
         sendMsg.put("msg", msg);
         sendMsg.put("user", "admin");
