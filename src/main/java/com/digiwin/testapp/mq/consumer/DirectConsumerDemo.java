@@ -17,6 +17,6 @@ import java.util.Map;
 public class DirectConsumerDemo {
     @RabbitHandler
     public void process(Map msg) {
-        System.out.println("consumer1 收到消息：" + msg);
+        System.out.println("direct consumer1 收到消息：" + msg);
     }
 }

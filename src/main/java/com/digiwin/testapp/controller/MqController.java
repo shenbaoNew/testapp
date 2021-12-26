@@ -19,12 +19,21 @@ public class MqController {
 
     @RequestMapping("/send")
     public void sendMessage() {
-        mqService.sendMsg("hello,beijing");
+        //消息会被发送到queueDemo，且只会被一个消费者消费
+        mqService.sendMsg("hello,beijing,direct");
     }
 
     @RequestMapping("/sendtopic")
     public void sendTopicMessage() {
+        //消息会同时发送到topicQueueDemo1和topicQueueDemo2(因为topicQueueDemo2关心topic.#,与本次tag==>topic.demo1匹配)
         mqService.sendTopicMsg("hello,beijing,topic", "topic.demo1");
+        //消息只会被发送到topicQueueDemo2
         mqService.sendTopicMsg("hello,beijing,topic", "topic.demo2");
+    }
+
+    @RequestMapping("/sendfanout")
+    public void sendFanoutMessage() {
+        //消息会发送给所有绑定到fanoutExchangeDemo的队列
+        mqService.sendFanoutMsg("hello,beijing,fanout");
     }
 }

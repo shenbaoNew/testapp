@@ -24,21 +24,29 @@ public class MqService implements IMqService {
 
     @Override
     public void sendMsg(String msg) {
-        Map<String, Object> sendMsg = new HashMap<>();
-        sendMsg.put("msg", msg);
-        sendMsg.put("user", "admin");
-        sendMsg.put("time", new Date());
-        sendMsg.put("uid", String.valueOf(UUID.randomUUID()));
+        Map<String, Object> sendMsg = getMsg(msg);
         rabbitTemplate.convertAndSend("directExchangeDemo", "demo_router_key", sendMsg);
     }
 
     @Override
     public void sendTopicMsg(String msg, String routerKey) {
+        Map<String, Object> sendMsg = getMsg(msg);
+        rabbitTemplate.convertAndSend("topicExchangeDemo", routerKey, sendMsg);
+    }
+
+    @Override
+    public void sendFanoutMsg(String msg) {
+        Map<String, Object> sendMsg = getMsg(msg);
+        //fanout类型exchange不需要给routerkey，给了也不起作用
+        rabbitTemplate.convertAndSend("fanoutExchangeDemo", null, sendMsg);
+    }
+
+    public Map getMsg(String msg){
         Map<String, Object> sendMsg = new HashMap<>();
         sendMsg.put("msg", msg);
         sendMsg.put("user", "admin");
         sendMsg.put("time", new Date());
         sendMsg.put("uid", String.valueOf(UUID.randomUUID()));
-        rabbitTemplate.convertAndSend("topicExchangeDemo", routerKey, sendMsg);
+        return sendMsg;
     }
 }

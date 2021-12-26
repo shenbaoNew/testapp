@@ -9,5 +9,7 @@ package com.digiwin.testapp.mq.publisher;
 public interface IMqService {
     void sendMsg(String msg);
 
-    void sendTopicMsg(String msg,String routerKey);
+    void sendTopicMsg(String msg, String routerKey);
+
+    void sendFanoutMsg(String msg);
 }

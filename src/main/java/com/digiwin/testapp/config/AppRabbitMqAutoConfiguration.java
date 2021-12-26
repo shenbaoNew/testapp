@@ -18,6 +18,7 @@ public class AppRabbitMqAutoConfiguration {
 
     @Bean
     public DirectExchange directExchangeDemo() {
+        //direct 类型交换器
         return new DirectExchange("directExchangeDemo", true, false);
     }
 
@@ -38,6 +39,7 @@ public class AppRabbitMqAutoConfiguration {
 
     @Bean
     public TopicExchange topicExchangeDemo() {
+        //topic 类型交换器
         return new TopicExchange("topicExchangeDemo", true, false);
     }
 
@@ -58,6 +60,36 @@ public class AppRabbitMqAutoConfiguration {
 
     @Bean
     public Binding topicBinding2() {
+        //# 代表匹配一个或者多个单词 topic.test.demo
+        //* 代表匹配一个单词 topic.test
         return BindingBuilder.bind(topicQueueDemo2()).to(topicExchangeDemo()).with("topic.#");
+    }
+
+    @Bean
+    public FanoutExchange fanoutExchangeDemo() {
+        //fanout 类型交换器  ==> 路由键无需配置,配置也不起作用
+        return new FanoutExchange("fanoutExchangeDemo", true, false);
+    }
+
+    @Bean
+    public Queue fanoutQueueDemo1() {
+        return new Queue("fanoutQueueDemo1", true);
+    }
+
+    @Bean
+    public Queue fanoutQueueDemo2() {
+        //路由键无需配置
+        return new Queue("fanoutQueueDemo2", true);
+    }
+
+    @Bean
+    public Binding fanoutBinding1() {
+        //路由键无需配置
+        return BindingBuilder.bind(fanoutQueueDemo1()).to(fanoutExchangeDemo());
+    }
+
+    @Bean
+    public Binding fanoutBinding2() {
+        return BindingBuilder.bind(fanoutQueueDemo2()).to(fanoutExchangeDemo());
     }
 }

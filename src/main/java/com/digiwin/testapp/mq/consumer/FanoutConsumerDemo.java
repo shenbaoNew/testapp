@@ -13,10 +13,10 @@ import java.util.Map;
  * Description:
  */
 @Component
-@RabbitListener(queues = {"queueDemo"})
-public class DirectConsumerDemo2 {
+@RabbitListener(queues = {"fanoutQueueDemo1"})
+public class FanoutConsumerDemo {
     @RabbitHandler
     public void process(Map msg) {
-        System.out.println("direct consumer2 收到消息：" + msg);
+        System.out.println("fanout consumer1 收到消息：" + msg);
     }
 }
