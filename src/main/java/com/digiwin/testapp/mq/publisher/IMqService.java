@@ -12,4 +12,15 @@ public interface IMqService {
     void sendTopicMsg(String msg, String routerKey);
 
     void sendFanoutMsg(String msg);
+
+    /**
+     * 测试找不到交换机
+     */
+    void testNotFindExchange(String msg);
+
+    /**
+     * 测试找到了交换机，但是找不到队列
+     * @param msg
+     */
+    void  testNotFindQueue(String msg);
 }

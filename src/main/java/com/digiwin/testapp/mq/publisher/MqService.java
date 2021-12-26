@@ -41,6 +41,18 @@ public class MqService implements IMqService {
         rabbitTemplate.convertAndSend("fanoutExchangeDemo", null, sendMsg);
     }
 
+    @Override
+    public void testNotFindExchange(String msg) {
+        Map<String, Object> sendMsg = getMsg(msg);
+        rabbitTemplate.convertAndSend("noexistsdirectExchangeDemo", "demo_router_key", sendMsg);
+    }
+
+    @Override
+    public void testNotFindQueue(String msg) {
+        Map<String, Object> sendMsg = getMsg(msg);
+        rabbitTemplate.convertAndSend("directExchangeDemo", "demo_router_key_not_find", sendMsg);
+    }
+
     public Map getMsg(String msg){
         Map<String, Object> sendMsg = new HashMap<>();
         sendMsg.put("msg", msg);

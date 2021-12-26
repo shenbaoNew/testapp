@@ -36,4 +36,16 @@ public class MqController {
         //消息会发送给所有绑定到fanoutExchangeDemo的队列
         mqService.sendFanoutMsg("hello,beijing,fanout");
     }
+
+    @RequestMapping("/noexchange")
+    public void sendNoExchange() {
+        //测试确认机制===>找不到交换机
+        mqService.testNotFindExchange("hello,beijing,not exists exchange");
+    }
+
+    @RequestMapping("/noqueue")
+    public void sendNoQueue() {
+        //测试确认机制===>找到交换机,但找不到队列
+        mqService.testNotFindQueue("hello,beijing,not exists queue");
+    }
 }
