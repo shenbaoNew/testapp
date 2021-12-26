@@ -21,4 +21,10 @@ public class MqController {
     public void sendMessage() {
         mqService.sendMsg("hello,beijing");
     }
+
+    @RequestMapping("/sendtopic")
+    public void sendTopicMessage() {
+        mqService.sendTopicMsg("hello,beijing,topic", "topic.demo1");
+        mqService.sendTopicMsg("hello,beijing,topic", "topic.demo2");
+    }
 }

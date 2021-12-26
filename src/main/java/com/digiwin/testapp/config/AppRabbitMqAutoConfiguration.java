@@ -1,9 +1,6 @@
 package com.digiwin.testapp.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,13 +12,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class AppRabbitMqAutoConfiguration {
+    public final static String DIRECT_ROUTER_KEY = "demo_router_key";
+    public final static String TOPIC_ROUTER_KEY1 = "topic.demo1";
+    public final static String TOPIC_ROUTER_KEY2 = "topic.demo2";
+
     @Bean
     public DirectExchange directExchangeDemo() {
         return new DirectExchange("directExchangeDemo", true, false);
     }
 
     @Bean
-    public Queue queueDemo() {
+    public Queue directQueueDemo() {
         // durable:是否持久化,默认是false,持久化队列：会被存储在磁盘上，当消息代理重启时仍然存在，暂存队列：当前连接有效
         // exclusive:默认也是false，只能被当前创建的连接使用，而且当连接关闭后队列即被删除。此参考优先级高于durable
         // autoDelete:是否自动删除，当没有生产者或者消费者使用此队列，该队列会自动删除。
@@ -30,8 +31,33 @@ public class AppRabbitMqAutoConfiguration {
     }
 
     @Bean
-    public Binding bindingDemo() {
+    public Binding directBindingDemo() {
         //绑定  将队列和交换机绑定, 并设置用于匹配键：TestDirectRouting
-        return BindingBuilder.bind(queueDemo()).to(directExchangeDemo()).with("demo_router_key");
+        return BindingBuilder.bind(directQueueDemo()).to(directExchangeDemo()).with(DIRECT_ROUTER_KEY);
+    }
+
+    @Bean
+    public TopicExchange topicExchangeDemo() {
+        return new TopicExchange("topicExchangeDemo", true, false);
+    }
+
+    @Bean
+    public Queue topicQueueDemo1() {
+        return new Queue("topicQueueDemo1", true);
+    }
+
+    @Bean
+    public Queue topicQueueDemo2() {
+        return new Queue("topicQueueDemo2", true);
+    }
+
+    @Bean
+    public Binding topicBinding1() {
+        return BindingBuilder.bind(topicQueueDemo1()).to(topicExchangeDemo()).with(TOPIC_ROUTER_KEY1);
+    }
+
+    @Bean
+    public Binding topicBinding2() {
+        return BindingBuilder.bind(topicQueueDemo2()).to(topicExchangeDemo()).with("topic.#");
     }
 }
