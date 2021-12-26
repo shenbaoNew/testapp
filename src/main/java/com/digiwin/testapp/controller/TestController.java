@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
  * Description:
  */
 @RestController
-@RequestMapping("/test")
+//@RequestMapping("/test")
 public class TestController {
     @Autowired
     private ITestService testService;
 
-    @RequestMapping("/a")
+    //@RequestMapping("/a")
     public void test(){
         testService.test();
     }
