@@ -5,6 +5,8 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +23,12 @@ public class ManualAckListener implements ChannelAwareMessageListener {
     public void onMessage(Message message, Channel channel) throws Exception {
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
-            String msg = message.toString();
-            String[] msgArray = msg.split("'");
-            Map<String, String> msgMap = mapStringToMap(msgArray[1].trim(), 4);
-            String messageId = msgMap.get("uid");
-            String messageData = msgMap.get("msg");
-            String createTime = msgMap.get("time");
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(message.getBody());
+            ObjectInputStream inputStream = new ObjectInputStream(byteArrayInputStream);
+            Map<String,Object> msgMap = (Map<String,Object>)inputStream.readObject();
+            Object messageId = msgMap.get("uid");
+            Object messageData = msgMap.get("msg");
+            Object createTime = msgMap.get("time");
             //发送与消费的速率对比
             Thread.sleep(5000);
             System.out.println(new Date() + "ManualAckListener  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);

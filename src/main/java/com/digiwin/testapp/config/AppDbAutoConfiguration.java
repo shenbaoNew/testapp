@@ -30,9 +30,12 @@ public class AppDbAutoConfiguration {
     public AppDbAutoConfiguration() {
     }
 
-    @Bean(name = {"app-dataSource"})
+    @Bean(name = {"app-dataSource"}, destroyMethod = "")
     @Conditional({DbEnableCondition.class})
     public BasicDataSource basicDataSource() {
+        //应用程序关闭时 BasicDataSource 自动关闭
+        //Spring使用默认的destroy方法关闭DataSource但它已经关闭
+        //否则关闭时会报一个警告
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
         dataSource.setUrl(environment.getProperty("spring.datasource.url"));
@@ -70,7 +73,7 @@ public class AppDbAutoConfiguration {
 
     @Bean(name = {"app-jdbcTemplate"})
     @Conditional({DbEnableCondition.class})
-    public JdbcTemplate jdbcTemplate(@Qualifier("app-proxyDataSource") DataSource dataSource){
+    public JdbcTemplate jdbcTemplate(@Qualifier("app-proxyDataSource") DataSource dataSource) {
         JdbcTemplate template = new JdbcTemplate(dataSource);
         return template;
     }
