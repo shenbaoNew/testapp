@@ -5,6 +5,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,9 @@ public class ManualAckListener implements ChannelAwareMessageListener {
             String messageId = msgMap.get("uid");
             String messageData = msgMap.get("msg");
             String createTime = msgMap.get("time");
-            System.out.println("  ManualAckListener  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+            //发送与消费的速率对比
+            Thread.sleep(5000);
+            System.out.println(new Date() + "ManualAckListener  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
             System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
             channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
             //channel.basicReject(deliveryTag, true);//第二个参数，true会重新放回队列，所以需要自己根据业务逻辑判断什么时候使用拒绝
