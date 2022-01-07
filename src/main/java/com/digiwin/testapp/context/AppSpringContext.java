@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
  * Date: 2021/12/22 16:06
  * Description:
  */
-public class SpringBeanUtils {
+public class AppSpringContext {
     private static ApplicationContext context;
 
     public static ApplicationContext getContext() {
