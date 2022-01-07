@@ -1,6 +1,8 @@
 package com.digiwin.testapp.context;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * FileName:SpringBeanUtils
@@ -8,14 +10,24 @@ import org.springframework.context.ApplicationContext;
  * Date: 2021/12/22 16:06
  * Description:
  */
-public class AppSpringContext {
+public class AppSpringContext implements ApplicationContextAware {
     private static ApplicationContext context;
 
     public static ApplicationContext getContext() {
         return context;
     }
 
-    public static void setContext(ApplicationContext context) {
-        context = context;
+    public AppSpringContext() {
+
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context = applicationContext;
+    }
+
+    public static <T> T getBean(String name, Class<T> tClass) {
+        T bean = (T) context.getBean(name);
+        return bean;
     }
 }

@@ -1,7 +1,6 @@
 package com.digiwin.testapp.config.condition;
 
 import com.digiwin.testapp.appconst.AppConsts;
-import com.digiwin.testapp.context.SpringBeanUtils;
 import com.digiwin.testapp.utils.AppCommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Condition;
