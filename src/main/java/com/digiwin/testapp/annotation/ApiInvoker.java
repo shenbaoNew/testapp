@@ -17,10 +17,10 @@ public @interface ApiInvoker {
      *
      * @return
      */
-    String callerName();
+    String callerName() default "";
 
     /*
     服务方服务名称
      */
-    String serviceName();
+    String serviceName() default "";
 }
