@@ -2,9 +2,9 @@ package com.digiwin.testapp;
 
 import com.digiwin.testapp.annotation.AppService;
 import com.digiwin.testapp.config.AppTestAutoConfiguration;
-import com.digiwin.testapp.context.SpringBeanUtils;
 import com.digiwin.testapp.model.User;
 import com.digiwin.testapp.service.ITestService;
+import com.digiwin.testapp.service.dap.ApiInvokerTest;
 import com.digiwin.testapp.service.impl.TestService;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 public class TestappApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(TestappApplication.class, args);
-        SpringBeanUtils.setContext(context);
         String[] beanDefinitionNames = context.getBeanDefinitionNames();
         for (String bean : beanDefinitionNames) {
             System.out.println(bean);
@@ -41,6 +40,8 @@ public class TestappApplication {
                 AppService annotation = test.getAnnotation(AppService.class);
                 System.out.println("id=" + annotation.id() + " callback=" + annotation.callback() + " desc=" + annotation.desc().toString());
             }
+            ApiInvokerTest apiInvokerTest = new ApiInvokerTest();
+            apiInvokerTest.test1();
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
