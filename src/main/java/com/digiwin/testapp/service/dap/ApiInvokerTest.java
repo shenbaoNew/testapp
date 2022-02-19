@@ -13,14 +13,14 @@ import java.lang.reflect.Method;
  * Description:
  */
 public class ApiInvokerTest {
-    @ApiInvoker(caller = "a.b.c", serviceName = "a1.b1.c1")
-    @ApiInvoker(caller = "m.n.q", serviceName = "m1.n1.q1")
+    @ApiInvoker(callerName = "a.b.c", serviceName = "a1.b1.c1")
+    @ApiInvoker(callerName = "m.n.q", serviceName = "m1.n1.q1")
     public void test1() {
         try {
             Method test1 = this.getClass().getMethod("test1");
             MulApiInvoker mulApiInvoker = test1.getAnnotation(MulApiInvoker.class);
             for (ApiInvoker invoker : mulApiInvoker.value()) {
-                System.out.println("caller:" + invoker.caller() + " service:" + invoker.serviceName());
+                System.out.println("caller:" + invoker.callerName() + " service:" + invoker.serviceName());
             }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@ public @interface ApiInvoker {
      *
      * @return
      */
-    String caller();
+    String callerName();
 
     /*
     服务方服务名称
