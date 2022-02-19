@@ -19,4 +19,9 @@ public @interface AppService {
     public String callback() default "";
 
     public String[] desc() default {};
+
+    /**
+     * 服务对应的表名
+     */
+    String[] tableNames() default {};
 }

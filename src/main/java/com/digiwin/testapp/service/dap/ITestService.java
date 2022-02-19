@@ -11,7 +11,7 @@ import com.digiwin.testapp.annotation.MulApiInvoker;
  * Description:
  */
 public interface ITestService {
-    @AppService(id = "a.b.c.d")
+    @AppService(id = "a.b.c.d", tableNames = "pcc_task")
     @ApiInvoker(callerName = "a1.b1.c1.d1")
     @ApiInvoker(callerName = "a2.b2.c2.d2")
     public void test();
