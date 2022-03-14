@@ -5,12 +5,14 @@ import com.digiwin.testapp.config.AppTestAutoConfiguration;
 import com.digiwin.testapp.model.User;
 import com.digiwin.testapp.service.ITestService;
 import com.digiwin.testapp.service.dap.ApiInvokerTest;
+import com.digiwin.testapp.service.dap.RestTest;
 import com.digiwin.testapp.service.impl.TestService;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.util.Assert;
 
 import java.lang.reflect.Method;
 
@@ -40,10 +42,18 @@ public class TestappApplication {
                 AppService annotation = test.getAnnotation(AppService.class);
                 System.out.println("id=" + annotation.id() + " callback=" + annotation.callback() + " desc=" + annotation.desc().toString());
             }
-            ApiInvokerTest apiInvokerTest = new ApiInvokerTest();
-            apiInvokerTest.test1();
+            test();
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void test() {
+        //ApiInvokerTest apiInvokerTest = new ApiInvokerTest();
+        //apiInvokerTest.test1();
+        //RestTest restTest = new RestTest();
+        //restTest.test();
+        Object obj = null;
+        Assert.notNull(obj,"obj mast not be null ");
     }
 }
