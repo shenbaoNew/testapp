@@ -54,6 +54,6 @@ public class TestappApplication {
         //RestTest restTest = new RestTest();
         //restTest.test();
         Object obj = null;
-        Assert.notNull(obj,"obj mast not be null ");
+        //Assert.notNull(obj,"obj mast not be null ");
     }
 }
