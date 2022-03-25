@@ -24,7 +24,7 @@ public class OpenApiFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("open api");
+        //System.out.println("open api");
         chain.doFilter(request, response);
     }
 
