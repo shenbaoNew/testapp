@@ -1,19 +1,33 @@
 package com.digiwin.testapp;
 
-import com.digiwin.testapp.utils.AppCommonUtils;
-import org.junit.jupiter.api.Test;
+import com.digiwin.testapp.service.impl.TestService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Properties;
 
-@SpringBootTest
-class TestappApplicationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {com.digiwin.testapp.TestappApplication.class})
+public class TestappApplicationTests {
 
     @Test
-    void contextLoads() {
-        Properties properties = AppCommonUtils.loadProperties("application.properties");
-        System.out.println(properties);
-        System.out.println(properties.getProperty("spring.datasource.driver-class-name"));
+    public void contextLoads() {
+
     }
 
+    @Autowired
+    RedissonClient client;
+
+    @Autowired
+    TestService testService;
+
+    @Test
+    public void abc() {
+        System.out.println(client);
+        System.out.println(testService);
+    }
 }

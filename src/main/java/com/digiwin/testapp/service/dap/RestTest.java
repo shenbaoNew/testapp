@@ -1,7 +1,5 @@
 package com.digiwin.testapp.service.dap;
 
-import com.digiwin.bm.common.service.BmCommonService;
-import com.digiwin.bm.common.utils.BmConstUtils;
 import com.google.gson.Gson;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -87,6 +85,5 @@ public class RestTest {
     }
 
     public static void test22(){
-        System.out.println(BmConstUtils.ACCT);
     }
 }
