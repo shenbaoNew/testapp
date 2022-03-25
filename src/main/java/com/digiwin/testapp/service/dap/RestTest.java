@@ -1,13 +1,10 @@
 package com.digiwin.testapp.service.dap;
 
+import com.digiwin.bm.common.service.BmCommonService;
+import com.digiwin.bm.common.utils.BmConstUtils;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.apache.http.client.methods.HttpPost;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,8 +18,9 @@ import java.util.Map;
  */
 public class RestTest {
     public static void main(String[] args) {
-        test2();
+        test22();
     }
+
     public static void test() {
         RestTemplate restTemplate = new RestTemplate();
         String json = "{\n" +
@@ -45,12 +43,14 @@ public class RestTest {
         httpHeaders.add("digi-type", "sync");
         httpHeaders.add("digi-service", "{\"prod\":\"MKP\",\"tenant_id\":\"E10ATHENA\",\"name\":\"supplier.delivery.plan.daily.info.get\",\"uid\":\"MKP\"}");
         httpHeaders.add("digi-key", "6f63960bf7ea10aed76414138274339d");
-        httpHeaders.add("digi-host", "{\"prod\":\"Athena\",\"ver\":\"1.0\",\"ip\":\"\",\"id\":\"AgileInteraction\",\"timestamp\":\"20220220133016673\",\"lang\":\"zh_TW\",\"eoc_acct\":\"athena\",\"acct\":\"athena\"}");
+        httpHeaders.add("digi-host", "{\"prod\":\"Athena2\",\"ver\":\"1.0\",\"ip\":\"\",\"id\":\"AgileInteraction\",\"timestamp\":\"20220220133016673\",\"lang\":\"zh_TW\",\"eoc_acct\":\"athena\",\"acct\":\"athena\"}");
         httpHeaders.add("digi-eocmap", "{\"eoc_company_id\":\"1\",\"eoc_region_id\":\"\",\"eoc_site_id\":\"1\"}");
         httpHeaders.add("token", "c618575b-8713-4169-8c1a-2697b40683fb");
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, httpHeaders);
         ResponseEntity<Map> mapResponseEntity = restTemplate.postForEntity("https://esp-test.apps.digiwincloud.com.cn/CROSS/RESTful",
                 entity, Map.class);
+        //ResponseEntity<String> mapResponseEntity = restTemplate.postForEntity("https://esp-test.apps.digiwincloud.com.cn/CROSS/RESTful",
+        //        entity, String.class);
         System.out.println(mapResponseEntity);
     }
 
@@ -83,5 +83,10 @@ public class RestTest {
         ResponseEntity<Map> mapResponseEntity = restTemplate.postForEntity("https://mkp-test.apps.digiwincloud.com.cn/eai",
                 entity, Map.class);
         System.out.println(mapResponseEntity);
+
+    }
+
+    public static void test22(){
+        System.out.println(BmConstUtils.ACCT);
     }
 }
