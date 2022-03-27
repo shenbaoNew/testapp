@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class RestTest {
     public static void main(String[] args) {
-        test22();
+        test();
     }
 
     public static void test() {
@@ -41,7 +41,7 @@ public class RestTest {
         httpHeaders.add("digi-type", "sync");
         httpHeaders.add("digi-service", "{\"prod\":\"MKP\",\"tenant_id\":\"E10ATHENA\",\"name\":\"supplier.delivery.plan.daily.info.get\",\"uid\":\"MKP\"}");
         httpHeaders.add("digi-key", "6f63960bf7ea10aed76414138274339d");
-        httpHeaders.add("digi-host", "{\"prod\":\"Athena2\",\"ver\":\"1.0\",\"ip\":\"\",\"id\":\"AgileInteraction\",\"timestamp\":\"20220220133016673\",\"lang\":\"zh_TW\",\"eoc_acct\":\"athena\",\"acct\":\"athena\"}");
+        httpHeaders.add("digi-host", "{\"prod\":\"Athena\",\"ver\":\"1.0\",\"ip\":\"\",\"id\":\"AgileInteraction\",\"timestamp\":\"20220220133016673\",\"lang\":\"zh_TW\",\"eoc_acct\":\"athena\",\"acct\":\"athena\"}");
         httpHeaders.add("digi-eocmap", "{\"eoc_company_id\":\"1\",\"eoc_region_id\":\"\",\"eoc_site_id\":\"1\"}");
         httpHeaders.add("token", "c618575b-8713-4169-8c1a-2697b40683fb");
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, httpHeaders);
@@ -49,7 +49,7 @@ public class RestTest {
                 entity, Map.class);
         //ResponseEntity<String> mapResponseEntity = restTemplate.postForEntity("https://esp-test.apps.digiwincloud.com.cn/CROSS/RESTful",
         //        entity, String.class);
-        System.out.println(mapResponseEntity);
+        System.out.println(mapResponseEntity.getBody());
     }
 
     public static void test2() {
