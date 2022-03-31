@@ -12,11 +12,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Method;
 
 @SpringBootApplication
+@EnableAuthorizationServer
 public class TestappApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(TestappApplication.class, args);
