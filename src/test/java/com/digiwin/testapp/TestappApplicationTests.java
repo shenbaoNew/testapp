@@ -23,37 +23,37 @@ public class TestappApplicationTests {
 
     }
 
-    @Autowired
-    RedissonClient client;
-
-    @Autowired
-    TestService testService;
+    //@Autowired
+    //RedissonClient client;
+    //
+    //@Autowired
+    //TestService testService;
 
     //@Test
     public void abc() {
-        try {
-            System.out.println(client.getConfig().toJSON());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    System.out.println(client.getConfig().toJSON());
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     //@Test
     public void reentrantLock() {
-        //可重入锁
-        RLock lock = client.getLock("lock1");
-        try {
-            lock.lock();
-            try {
-                System.out.println("lock1 start ...");
-                Thread.sleep(3000);
-                System.out.println("lock1 end ...");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } finally {
-            lock.unlock();
-        }
+        ////可重入锁
+        //RLock lock = client.getLock("lock1");
+        //try {
+        //    lock.lock();
+        //    try {
+        //        System.out.println("lock1 start ...");
+        //        Thread.sleep(3000);
+        //        System.out.println("lock1 end ...");
+        //    } catch (InterruptedException e) {
+        //        e.printStackTrace();
+        //    }
+        //} finally {
+        //    lock.unlock();
+        //}
     }
 
     @Autowired
@@ -61,42 +61,45 @@ public class TestappApplicationTests {
 
     @Test
     public void token_password() {
-        //https://www.cnblogs.com/LOVE0612/p/9913336.html
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "password");
-        params.add("username", "admin");
-        params.add("password", "admin");
-        params.add("scope", "scope1 scope2");
-        String response = restTemplate.withBasicAuth("clientId", "clientSecret").
-                postForObject("/oauth/token", params, String.class);
-        System.out.println(response);
+        ////https://www.cnblogs.com/LOVE0612/p/9913336.html
+        //MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        //params.add("grant_type", "password");
+        //params.add("username", "admin");
+        //params.add("password", "admin");
+        //params.add("scope", "scope1 scope2");
+        //String response = restTemplate.withBasicAuth("clientId", "clientSecret").
+        //        postForObject("/oauth/token", params, String.class);
+        //System.out.println(response);
     }
 
     @Test
     public void token_client() {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "client_credentials");
-        String response = restTemplate.withBasicAuth("clientId", "clientSecret").
-                postForObject("/oauth/token", params, String.class);
-        System.out.println(response);
+        //MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        //params.add("grant_type", "client_credentials");
+        //String response = restTemplate.withBasicAuth("clientId", "clientSecret").
+        //        postForObject("/oauth/token", params, String.class);
+        //System.out.println(response);
     }
 
     @Test
     public void token_code() {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "authorization_code");
-        params.add("code", "KQ9rAR");
-        String response = restTemplate.withBasicAuth("clientId", "clientSecret").postForObject("/oauth/token", params, String.class);
-        System.out.println(response);
+        //MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        //params.add("grant_type", "authorization_code");
+        //params.add("code", "KQ9rAR");
+        //String response = restTemplate.withBasicAuth("clientId", "clientSecret").postForObject("/oauth/token", params, String.class);
+        //System.out.println(response);
     }
 
     @Test
     public void token_refresh() {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "refresh_token");
-        params.add("refresh_token", "fb00358a-44e2-4679-9129-1b96f52d8d5d");
-        String response = restTemplate.withBasicAuth("clientId", "clientSecret").
-                postForObject("/oauth/token", params, String.class);
-        System.out.println(response);
+        //MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        //params.add("grant_type", "refresh_token");
+        //params.add("refresh_token", "fb00358a-44e2-4679-9129-1b96f52d8d5d");
+        //String response = restTemplate.withBasicAuth("clientId", "clientSecret").
+        //        postForObject("/oauth/token", params, String.class);
+        //System.out.println(response);
+    }
+
+    public void setTestService(){
     }
 }

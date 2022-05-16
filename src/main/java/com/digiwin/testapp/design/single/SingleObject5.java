@@ -12,7 +12,10 @@ import com.digiwin.testapp.design.Other;
  */
 public class SingleObject5 {
     private SingleObject5() {
-
+        if (SingleObjectHolder.INSTANCE != null) {
+            //防止反射破解单例模式
+            throw new RuntimeException();
+        }
     }
 
     public static SingleObject5 getInstance() {

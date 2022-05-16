@@ -22,7 +22,7 @@ public class PrinterProxy implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("cglib proxy start...");
-        Object invoke = method.invoke(target, objects);
+        Object invoke = methodProxy.invokeSuper(o, objects);
         System.out.println("cglib proxy end...");
         return invoke;
     }

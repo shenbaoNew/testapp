@@ -1,13 +1,19 @@
 package com.digiwin.testapp.controller;
 
+import com.digiwin.testapp.model.User;
 import com.digiwin.testapp.service.ITestService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +25,7 @@ import java.util.concurrent.TimeUnit;
  * Description:
  */
 @RestController
+@Validated
 //@RequestMapping("/eai")
 public class TestController {
     @Autowired
@@ -71,6 +78,12 @@ public class TestController {
             }
         }
         return formatDate();
+    }
+
+    @RequestMapping("/test3")
+    public String test3(@NotNull(message = "用户不可为空") User user) {
+        User user1 = new User(user.getCode(), user.getName());
+        return user1.getName();
     }
 
     private String formatDate() {

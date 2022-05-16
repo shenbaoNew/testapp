@@ -19,7 +19,8 @@ public class ProxyDemo {
         proxy.save("data");
 
         //cglib动态代理
-        Printer printer = (Printer) PrinterProxy.getProxy(new Printer());
-        printer.print("xxx.java");
+        Printer printer = new Printer();
+        Printer printerProxy = (Printer) PrinterProxy.getProxy(printer);
+        printerProxy.print("xxx.java");
     }
 }

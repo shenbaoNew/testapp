@@ -1,7 +1,5 @@
 package com.digiwin.testapp.mq.publisher;
 
-import com.digiwin.testapp.config.AppRabbitMqAutoConfiguration;
-import com.digiwin.testapp.mq.publisher.IMqService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

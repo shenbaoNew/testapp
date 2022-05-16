@@ -1,6 +1,9 @@
 package com.digiwin.testapp.model;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * FileName:User
@@ -8,7 +11,6 @@ import org.springframework.stereotype.Component;
  * Date: 2021/12/27 22:20
  * Description:
  */
-@Component
 public class User {
     private String code;
     private String name;
@@ -17,6 +19,12 @@ public class User {
     }
 
     public User(String code, String name) {
+        if (code == null) {
+            throw new RuntimeException("用户编号不可为空");
+        }
+        if (name == null) {
+            throw new RuntimeException("用户名称不可为空");
+        }
         this.code = code;
         this.name = name;
     }
